@@ -13,8 +13,14 @@ export function FileUploader(){
     }
 
     return(
-        <div>
-            <input type="file" onChange={handleFileCHange}/>
+        <div className="bg-white rounded-xl shadow-sm p-12 border-2 border-dashed border-gray-300 text-center no-print">
+            <input 
+            className="hidden"
+            type="file" 
+            accept="image/*"
+            onChange={handleFileCHange}
+            capture="environment" // This tells mobile phones to open the Camera immediately
+            />
             {
                 file &&(
                     <div>

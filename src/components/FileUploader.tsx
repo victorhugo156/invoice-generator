@@ -1,14 +1,43 @@
-import { useState, type ChangeEvent } from "react"
+import { useRef, useState, type ChangeEvent } from "react"
 
 export function FileUploader(){
 
     const [file, setFile] = useState<File | null>(null);
 
-    function handleFileCHange(e: ChangeEvent<HTMLInputElement>){
+    const [isProcessing, setIsProcessing] = useState(false);
 
-        if (e.target.files){
-            setFile(e.target.files[0])
+    const [ imagePreview, setImagePreview] = useState<string | null>(null)
+
+    const fileInputRef = useRef<HTMLInputElement>(null)
+
+
+    const handleFileUpload = async(event: ChangeEvent<HTMLInputElement>)=>{
+
+        //Here I am capturing the tile reference, ex. metadata like name, size and type
+        if (event.target.files){
+            setFile(event.target.files[0])
+        }else{
+            return
         }
+
+        //Now I need to convert the file, which it is my image into a string data base64
+
+        const reader = new FileReader()
+
+        reader.onload = async(e)=>{
+            // This 'base64' string is a long text version of your image
+            const base64 = e.target?.result as string
+
+            // Now the app can show the image on screen
+            setImagePreview(base64)
+        }
+
+    }
+
+
+    function downloadAndOpenEmail(){
+
+        console.log(fileInputRef.current)
 
     }
 
@@ -18,7 +47,8 @@ export function FileUploader(){
             className="hidden"
             type="file" 
             accept="image/*"
-            onChange={handleFileCHange}
+            ref={fileInputRef}
+            onChange={handleFileUpload}
             capture="environment" // This tells mobile phones to open the Camera immediately
             />
             {
@@ -30,6 +60,13 @@ export function FileUploader(){
                     </div>
                 )
             }
+
+            <button 
+            onClick={()=>fileInputRef.current?.click()}
+            className="bg-green-500 rounded-lg text-white font-bold px-8 py-4 hover:bg-green-600 shadow-lg "
+            >
+                {isProcessing ? "...Uploading File" :  "Upload Web-clock Picture"}
+            </button>
         </div>
     )
 }

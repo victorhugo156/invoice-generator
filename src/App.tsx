@@ -7,12 +7,14 @@ import { CheckIcon } from "@phosphor-icons/react";
 
 export function App() {
 
+  //Sequence Array of the upload invoice state
   const uploadSequence = [1, 2, 3];
 
+  //Steps of the sequence, Starts with step 1
   const [step, setStep] = useState(1)
 
   return (
-    <div className="flex-col w-screen bg-green-500">
+    <div className="min-h-screen bg-gray-100">
       <Header />
       <main className="max-w-4xl mx-auto px-4">
 

@@ -200,7 +200,7 @@ export function InvoicePreview({data, id}:InvoicePreviewProps) {
                     <tfoot>
                         <tr className="h-10">
                             <td className="text-lg bg-gray-100 border-r border-gray-200 px-2 font-bold">TOTAL</td>
-                            <td className="text-lg text-end font-bold">${subtotal}</td>
+                            <td className="text-lg text-end font-bold">${total}</td>
                         </tr>
                     </tfoot>
                 </table>

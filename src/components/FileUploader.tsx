@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from "react"
+import { useRef, type ChangeEvent } from "react"
 
 
 interface UploadFilesProps{
@@ -9,8 +9,6 @@ interface UploadFilesProps{
 
 export function FileUploader({isProcessing, error, onFileSelected}:UploadFilesProps){
 
-    const [file, setFile] = useState<File | null>(null);
-
     const fileInputRef = useRef<HTMLInputElement>(null);
 
 
@@ -20,8 +18,6 @@ export function FileUploader({isProcessing, error, onFileSelected}:UploadFilesPr
         const selectedFile = event.target.files?.[0];
         if (!selectedFile) return;
         
-        setFile(selectedFile);
-
         //Now I need to convert the file, which it is my image into a string data base64
 
         const reader = new FileReader()
@@ -54,6 +50,7 @@ export function FileUploader({isProcessing, error, onFileSelected}:UploadFilesPr
             >
                 {isProcessing ? "Reading Timesheet..." :  "Upload Screenshot"}
             </button>
+            {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
         </div>
     )
 }

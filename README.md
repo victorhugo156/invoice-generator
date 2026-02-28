@@ -1,3 +1,21 @@
+# Invoice Generator
+
+## Netlify Deployment
+
+This project is configured for Netlify with [netlify.toml](./netlify.toml).
+
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Netlify Function: `/.netlify/functions/extract-hours`
+
+Required environment variable in Netlify:
+
+- `GEMINI_API_KEY` = your Google Gemini API key
+
+For local function testing, run with Netlify CLI (`netlify dev`) so `/.netlify/functions/*` routes are available.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

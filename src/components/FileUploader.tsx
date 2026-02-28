@@ -1,24 +1,26 @@
 import { useRef, useState, type ChangeEvent } from "react"
 
-export function FileUploader(){
+
+interface UploadFilesProps{
+    isProcessing : boolean;
+    error: string | null;
+    onFileSelected: (base64: string)=> Promise<void>
+}
+
+export function FileUploader({isProcessing, error, onFileSelected}:UploadFilesProps){
 
     const [file, setFile] = useState<File | null>(null);
 
-    const [isProcessing, setIsProcessing] = useState(false);
-
-    const [ imagePreview, setImagePreview] = useState<string | null>(null)
-
-    const fileInputRef = useRef<HTMLInputElement>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
 
-    const handleFileUpload = async(event: ChangeEvent<HTMLInputElement>)=>{
+    const handleChange = async (event: ChangeEvent<HTMLInputElement>)=>{
 
         //Here I am capturing the tile reference, ex. metadata like name, size and type
-        if (event.target.files){
-            setFile(event.target.files[0])
-        }else{
-            return
-        }
+        const selectedFile = event.target.files?.[0];
+        if (!selectedFile) return;
+        
+        setFile(selectedFile);
 
         //Now I need to convert the file, which it is my image into a string data base64
 
@@ -28,16 +30,10 @@ export function FileUploader(){
             // This 'base64' string is a long text version of your image
             const base64 = e.target?.result as string
 
-            // Now the app can show the image on screen
-            setImagePreview(base64)
-        }
-
-    }
-
-
-    function downloadAndOpenEmail(){
-
-        console.log(fileInputRef.current)
+            await onFileSelected(base64)
+        };
+        
+        reader.readAsDataURL(selectedFile);
 
     }
 
@@ -48,24 +44,15 @@ export function FileUploader(){
             type="file" 
             accept="image/*"
             ref={fileInputRef}
-            onChange={handleFileUpload}
+            onChange={handleChange}
             capture="environment" // This tells mobile phones to open the Camera immediately
             />
-            {
-                file &&(
-                    <div>
-                        <p>File Name: {file.name}</p>
-                        <p>Size:{(file.size /1024).toFixed(2)} kb</p>
-                        <p>Type:{file.type}</p>
-                    </div>
-                )
-            }
 
             <button 
             onClick={()=>fileInputRef.current?.click()}
             className="bg-green-500 rounded-lg text-white font-bold px-8 py-4 hover:bg-green-600 shadow-lg "
             >
-                {isProcessing ? "...Uploading File" :  "Upload Web-clock Picture"}
+                {isProcessing ? "Reading Timesheet..." :  "Upload Screenshot"}
             </button>
         </div>
     )

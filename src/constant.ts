@@ -20,6 +20,6 @@ export const DEFAULT_USER_DATA: InvoiceData = {
   invoiceNo: 60,
   date: new Date().toLocaleDateString('en-AU'),
   totalHours: 0,
-  payRate: 35.50, // Default pay rate - can be adjusted
+  payRate: 29.00, // Default pay rate - can be adjusted
   description: "digital service",
 };

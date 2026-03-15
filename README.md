@@ -12,7 +12,20 @@ Required environment variable in Netlify:
 
 - `GEMINI_API_KEY` = your Google Gemini API key
 
-For local function testing, run with Netlify CLI (`netlify dev`) so `/.netlify/functions/*` routes are available.
+## Local Development
+
+Use Netlify CLI for any work that needs Gemini or `/.netlify/functions/*`.
+
+- Create a local `.env` file with `GEMINI_API_KEY=your_local_key`
+- Start the app with `npm run dev:netlify`
+- Keep `npm run dev` only for frontend-only work that does not need Netlify Functions
+
+This keeps local and production aligned:
+
+- Local uses `netlify dev` + `.env`
+- Production uses Netlify deploys + Netlify environment variables
+
+For local function testing, run with Netlify CLI so `/.netlify/functions/*` routes are available.
 
 ---
 

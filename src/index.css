@@ -13,3 +13,5 @@
     --color-gray-400:rgb(156 163 175);
     --color-gray-800:#1f2937;
 }
+
+@layer base { img { display: initial; } }

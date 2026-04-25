@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
+import { Link } from "react-router-dom";
 
 
 const loginFormSchema = z.object({
@@ -79,7 +80,7 @@ export function LoginPage() {
 
           <div className="flex flex-row items-center justify-center gap-1 mt-8">
             <p className="text-xxs text-gray-400">Don't have an account?</p>
-            <a href="/signup" className="text-xxs font-bold text-purple-700">Click here to Sign up</a>
+            <Link to="/sign-up" className="text-xxs font-bold text-purple-700">Click here to Sign up</Link>
           </div>
         </div>
       </div>

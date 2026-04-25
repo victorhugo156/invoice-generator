@@ -1,6 +1,7 @@
 import { FileTextIcon } from "@phosphor-icons/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
@@ -18,7 +19,9 @@ type LoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export function LoginPage() {
 
-  const {register, handleSubmit, formState: {isSubmitting}} = useForm<LoginFormSchema>();
+  const {register, handleSubmit, formState: {isSubmitting}} = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
+  });
 
   async function handleLogin(data: LoginFormSchema) {
     console.log(data);
@@ -92,3 +95,4 @@ export function LoginPage() {
     </div>
   );
 }
+

@@ -45,7 +45,7 @@ export function InvoiceGeneratorPage() {
             <div
               className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
                 step === sequence
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-purple-700 text-white"
                   : step > sequence
                     ? "bg-green-500 text-white"
                     : "bg-white text-gray-400"

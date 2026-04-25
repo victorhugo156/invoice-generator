@@ -65,7 +65,7 @@ function NavButton({ isActive, label, onClick }: NavButtonProps) {
       className={`rounded-lg px-4 py-2 font-medium transition-colors ${
         isActive
           ? "bg-purple-700 text-white"
-          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          : "bg-purple-600 text-gray-800 hover:bg-gray-200"
       }`}
     >
       {label}

@@ -28,7 +28,7 @@ export function FileUploader({
   };
 
   return (
-    <div className="rounded-xl border-2 border-dashed border-gray-300 bg-white p-12 text-center shadow-sm no-print">
+    <div className="rounded-xl border-2 border-dashed border-gray-200 bg-white p-12 text-center shadow-sm no-print">
       <input
         className="hidden"
         type="file"
@@ -45,7 +45,7 @@ export function FileUploader({
         {isProcessing ? "Reading Timesheet..." : "Upload Screenshot"}
       </button>
 
-      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-3 text-sm font-medium text-gray-800">{error}</p>}
     </div>
   );
 }

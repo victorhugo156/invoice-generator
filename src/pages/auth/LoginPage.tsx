@@ -12,7 +12,6 @@ import { toast } from 'sonner';
 
 const loginFormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
 });
 
 type LoginFormSchema = z.infer<typeof loginFormSchema>;
@@ -74,11 +73,6 @@ export function LoginPage() {
             <div className="flex flex-col gap-1 ">
               <Label htmlFor="email" className="text-xxs font-bold text-gray-800 uppercase">Work Email</Label>
               <Input {...register("email")} id="email" type="email" autoComplete="email" placeholder="name@company.com" className="h-8 text-xxs placeholder:text-gray-300" />
-            </div>
-
-            <div className="flex flex-col gap-1 mb-8 ">
-              <Label htmlFor="password" className="text-xxs font-bold text-gray-800 uppercase">Password</Label>
-              <Input {...register("password")} type="password" autoComplete="current-password" placeholder="password" className="h-8 text-xxs placeholder:text-gray-300" />
             </div>
             <Button disabled={isSubmitting} type="submit" className="w-full h-10 text-sm font-bold text-white uppercase bg-purple-700 rounded-lg">Login</Button>
           </form>

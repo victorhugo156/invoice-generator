@@ -5,6 +5,9 @@ This file is a simple project tracker so I can quickly understand:
 - what I am working on now
 - what comes next
 
+## Working on
+- [] 14/05/2026 - Working on the dashboard screen. Creating UploadSequence and FileUploader component.
+
 ## Done So Far
 
 - [x] 24/02/2026 - Created the process indicator layout.

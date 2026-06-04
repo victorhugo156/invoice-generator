@@ -39,14 +39,14 @@ export function DashboardPage() {
     <div className="min-h-screen">
       <main className="mx-auto max-w-6xl flex flex-col items-center px-4 py-8">
         <section className="w-full mb-4">
-          <UploadSequence step={0}/>
+          <UploadSequence step={1}/>
         </section>
         <section className="w-full flex flex-col items-center gap-1 lg:gap-4 mb-6">
           <h1 className="text-lg lg:text-4xl font-black text-foreground ">Upload Timesheet Screenshot</h1>
           <p className="w-90 max-w-xl text-xs lg:text-2xl md:text-lg font-light leading-4 lg:leading-8 text-center ">Upload a clear image of your clock-on/off hours to begin extracting
           data with automated precision.</p>
         </section>
-        <section>
+        <section className="w-full flex justify-center items-center">
           <FileUploader onFileSelected={handleFileSelected}
             isProcessing={isProcessing}
             error={error} 

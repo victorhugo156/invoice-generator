@@ -6,7 +6,7 @@ This file is a simple project tracker so I can quickly understand:
 - what comes next
 
 ## Working on
-- [] 14/05/2026 - Working on the dashboard screen. Creating UploadSequence and FileUploader component.
+- [] 11/06/2026 - Start Backend
 
 ## Done So Far
 
@@ -17,6 +17,7 @@ This file is a simple project tracker so I can quickly understand:
 - [x] 09/04/2026 - Created a new folder structure to support more screens and components.
 - [x] 09/04/2026 - Created the `login` branch for feature development.
 - [x] 09/04/2026 - Created routes and layout using `react-router-dom`.
+- [x] 04/06/2026 - Working on the dashboard screen. Creating UploadSequence and FileUploader component.
 
 ## Notes
 
@@ -24,17 +25,12 @@ This file is a simple project tracker so I can quickly understand:
 - `main` should stay stable because it is connected to production.
 - New features should be developed in feature branches such as `login`.
 
-## Current Focus
-
-- [ ] Start building the authentication flow.
-- [ ] Keep the project structure simple and easy to understand while learning React.
-
 ## Todo: Second MVP
 
-- [ ] Create login screen.
-- [ ] Create sign-up screen.
-- [ ] Create complete profile screen.
-- [ ] Redesign dashboard screen.
+- [x ] Create login screen.
+- [ x] Create sign-up screen.
+- [x ] Create complete profile screen.
+- [x ] Redesign dashboard screen.
 - [ ] Deploy second MVP.
 
 ## Todo: Third MVP

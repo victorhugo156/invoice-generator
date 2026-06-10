@@ -5,6 +5,14 @@ This file is a simple project tracker so I can quickly understand:
 - what I am working on now
 - what comes next
 
+
+## NOTES
+- I have finished the layout for mobile, check with AI if for the first release I should
+make it already responsive
+- Check wih AI if I need to merge the frontend first or merge backend and frontend together to the main
+
+
+
 ## Working on
 - [] 11/06/2026 - Start Backend
 

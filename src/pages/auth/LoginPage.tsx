@@ -1,5 +1,5 @@
 import { FileTextIcon } from "@phosphor-icons/react";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,6 +9,12 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { Link } from "react-router-dom";
+import { api } from "@/lib/axios";
+import { queryClient } from "@/lib/react-query";
+import { useNavigate } from "react-router-dom";
+import type { ApiBackendError } from "@/@types/api_backend_error";
+import axios from "axios";
+import { DecorativeLoginCard } from "@/components/DecorativeLoginCard/DecorativeLoginCard";
 
 
 const loginFormSchema = z.object({
@@ -19,6 +25,8 @@ type LoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export function LoginPage() {
 
+  const navigate = useNavigate();
+
   const {register, handleSubmit, formState: {isSubmitting}} = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
   });
@@ -27,20 +35,74 @@ export function LoginPage() {
     console.log(data);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      toast.success('We have sent you an email with a link to login',{
-        action: {
-          label: 'Resend email',
-          onClick: () => {handleLogin(data)},
-        },
+
+      const response = await api.post('/auth/magic-link', {
+        email: data.email,
       });
+      console.log(response);
+      console.log(response.data)
+      //navigate('/dashboard');
+
+      // await new Promise(resolve => setTimeout(resolve, 2000));
+      // toast.success('We have sent you an email with a link to login',{
+      //   action: {
+      //     label: 'Resend email',
+      //     onClick: () => {handleLogin(data)},
+      //   },
+      // });
     } catch (error) {
       toast.error('Login failed');
     }
   }
 
 
+async function handleGoogleAuth(credentialResponse: CredentialResponse){
+
+  try {
+    const response = await api.post('/auth/google', {
+      credential: credentialResponse.credential,
+    })
+    await queryClient.invalidateQueries({ queryKey: ["me"] });
+    navigate('/dashboard');
+    
+  } catch (error) {
+
+    if(axios.isAxiosError(error)) {
+
+      const data = error.response?.data as ApiBackendError;
+      if (data.status === '400') {
+        toast.error('Server error');
+      }else if (data.status === '401') {
+        toast.error('Invalid credentials');
+      }else if (data.status === '409') {
+        toast.error(data.message);
+      }else{
+        toast.error("Ops...something went wrong")
+      }
+  }
+}}
+
+
+
   return (
+
+    <main>
+
+      <div>
+        <p className="text-lg text-concrete uppercase font-bold">the hours.</p>
+        <p className="text-lg text-concrete uppercase font-bold">the record</p>
+        <p className="text-lg text-concrete uppercase font-bold">the invoice</p>
+      </div>
+
+      <DecorativeLoginCard/>
+
+    </main>
+
+
+
+
+
+    /*
     <div className="flex min-h-screen flex-col gap-4 items-center justify-center px-4 py-8 ">
       <div className="w-full max-w-[440px] rounded-lg border border-gray-200 bg-white px-8 py-14 shadow-md max-[440px]:px-5">
         <header className="flex w-full flex-col items-center justify-center gap-2 mb-12">
@@ -55,14 +117,7 @@ export function LoginPage() {
             Log in to your account to start automating your financial workflow with architectural
             precision.
           </p>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              console.log(credentialResponse);
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
+          <GoogleLogin onSuccess={handleGoogleAuth}/>
           <div className="flex w-full flex-row items-center justify-center gap-2 mt-8 mb-8">
             <Separator className="flex-1 h-[1px] bg-gray-200" />
             <p className="shrink-0 px-2 text-xxs font-medium uppercase tracking-wide text-gray-400">
@@ -87,7 +142,6 @@ export function LoginPage() {
       <div className="w-full text-center mt-8">
         <p className="text-xxs text-gray-400">© 2026 VTR Technologies • All Rights Reserved</p>
       </div>
-    </div>
+    </div>*/
   );
 }
-

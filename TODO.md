@@ -7,17 +7,21 @@ This file is a simple project tracker so I can quickly understand:
 
 
 ## NOTES
-- I have finished the layout for mobile, check with AI if for the first release I should
-make it already responsive
-- Check wih AI if I need to merge the frontend first or merge backend and frontend together to the main
+
+18/06/2026 - I am still Learning React Query, I also got an idea how to Connect Google Authentication in my backend(Check the conversation tab Google Authentication). I have implemented the first function with useQuery, now I need to check how can I call this function.
+
+
+11/06/2026 - I have started the integration with my backend. Learnt about CORS and I have created an UseEffect in login page to check if my backend is connect and it worked. Now I will learn React Query and try to connect google service in my Backend.
 
 
 
 ## Working on
-- [] 11/06/2026 - Start Backend
+- [x] 25/06/2026 - Carry on with React Query Classes
+
 
 ## Done So Far
-
+- [x] 18/06/2026 - Learning React Query and try to connect Google service in my backend
+- [x] 11/06/2026 - Start Backend
 - [x] 24/02/2026 - Created the process indicator layout.
 - [x] 26/02/2026 - Created the upload box layout where the file button is placed.
 - [x] 27/02/2026 - Created the `FileUploader` component to upload the web-clock image.

@@ -1,52 +1,113 @@
 @import "tailwindcss";
 
 @theme {
+  /* TIMEKEEPER typography — Inter body, Inter Tight for condensed display */
   --font-sans:
     "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display:
+    "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --color-*: initial;
 
-  /* App palette */
-  --color-white: #ffffff;
-  --color-purple-700: #4338ca;
-  --color-purple-600: #f2f3ff;
-  --color-green-600: #16a34a;
-  --color-green-500: #22c55e;
-  --color-gray-200: #e2e7ff;
-  --color-gray-400: #445d99;
-  --color-gray-800: #113069;
+  /* TIMEKEEPER palette */
+  --color-warm-stock: #f5ebd5;
+  --color-ledger-ink: #263b39;
+  --color-stamp-red: #a94e37;
+  --color-punch-card-blue: #a9c4c6;
+  --color-clock-card-sage: #a8b8a0;
+  --color-aged-mustard: #e5bd67;
 
-  /* shadcn / radix primitives (values from your palette only) */
-  --color-background: #ffffff;
-  --color-foreground: #113069;
-  --color-card: #ffffff;
-  --color-card-foreground: #113069;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #113069;
-  --color-primary: #4338ca;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #f2f3ff;
-  --color-secondary-foreground: #113069;
-  --color-muted: #f2f3ff;
-  --color-muted-foreground: #445d99;
-  --color-accent: #f2f3ff;
-  --color-accent-foreground: #113069;
-  --color-destructive: #113069;
-  --color-border: #e2e7ff;
-  --color-input: #e2e7ff;
-  --color-ring: #4338ca;
+  --color-background: #f5ebd5;
+  --color-foreground: #263b39;
+  --color-muted: #a9c4c6;
+  --color-muted-foreground: #5c6f6d;
+  --color-border: #263b39;
+  --color-primary: #a94e37;
+  --color-primary-foreground: #f5ebd5;
+  --color-destructive: #a94e37;
+  --color-white: #faf4e6;
+  --color-ink: #263b39;
+  --color-steel: #5c6f6d;
+  --color-concrete: #e8dcc4;
+  --color-ticket: #a9c4c6;
+  --color-proof: #a94e37;
+  --color-wash: #a9c4c6;
+  --color-sheet: #faf4e6;
+
+  /* shadcn / radix primitives mapped to TIMEKEEPER */
+  --color-card: #faf4e6;
+  --color-card-foreground: #263b39;
+  --color-popover: #faf4e6;
+  --color-popover-foreground: #263b39;
+  --color-secondary: #a8b8a0;
+  --color-secondary-foreground: #263b39;
+  --color-accent: #a9c4c6;
+  --color-accent-foreground: #263b39;
+  --color-input: #263b39;
+  --color-ring: #a94e37;
+
+  /* Legacy aliases — existing pages still reference these utilities */
+  --color-purple-700: #a94e37;
+  --color-purple-600: #a9c4c6;
+  --color-purple-200: #c5d6d7;
+  --color-green-600: #8fa487;
+  --color-green-500: #a8b8a0;
+  --color-gray-200: #e8dcc4;
+  --color-gray-300: #c4b49a;
+  --color-gray-400: #5c6f6d;
+  --color-gray-800: #263b39;
+
+  /* Type scale — editorial, slightly tighter display rhythm */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.625rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.4rem;
+  --text-2xl: 2rem;
+  --text-2xl--line-height: 2.1rem;
+  --text-2xl--letter-spacing: -0.03em;
+  --text-3xl: 3rem;
+  --text-3xl--line-height: 1.05;
+  --text-3xl--letter-spacing: -0.04em;
+  --text-4xl: 4.5rem;
+  --text-4xl--line-height: 0.95;
+  --text-4xl--letter-spacing: -0.045em;
 
   --text-xxs: 0.625rem;
   --text-xxs--line-height: 1rem;
 
   --text-xxxs: 0.5rem;
   --text-xxxs--line-height: 0.75rem;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* TIMEKEEPER corners — clock-card, slightly rounded, not pills */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
 }
 
 @layer base {
   html {
-    @apply font-sans antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
   }
 
   img {

@@ -3,41 +3,40 @@ import { Separator } from "../ui/separator";
 
 export function DecorativeLoginCard(){
     return(
-        <div className="bg-accent max-w-36 p-15">
-            <div className="w-19 relative">
-                <div className="bg-aged-mustard">
+            <div>
+                <div className=" w-full h-8 bg-aged-mustard">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-accent">
+                <div className=" w-full h-8 bg-accent">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-punch-card-blue">
+                <div className=" w-full h-8 bg-punch-card-blue">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-aged-mustard">
+                <div className="w-full h-8 bg-aged-mustard">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-accent">
+                <div className="w-full h-8 bg-accent">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-punch-card-blue">
+                <div className="w-full h-8 bg-punch-card-blue">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-aged-mustard">
+                <div className=" w-full h-8bg-aged-mustard">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-accent">
+                <div className=" w-full h-8bg-accent">
                     <Separator/>
                     <Separator/>
                 </div>
-                <div className="bg-punch-card-blue">
+                <div className="w-full h-8 bg-punch-card-blue">
                     <Separator/>
                     <Separator/>
                 </div>
@@ -49,6 +48,6 @@ export function DecorativeLoginCard(){
                 </div>
             </div>
             </div>
-        </div>
+
     )
 }

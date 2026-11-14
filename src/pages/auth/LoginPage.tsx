@@ -1,11 +1,9 @@
-import { FileTextIcon } from "@phosphor-icons/react";
 import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { Link } from "react-router-dom";
@@ -18,7 +16,7 @@ import { DecorativeLoginCard } from "@/components/DecorativeLoginCard/Decorative
 
 
 const loginFormSchema = z.object({
-  email: z.string().email(),
+  email: z.email("Please enter a valid email address"),
 });
 
 type LoginFormSchema = z.infer<typeof loginFormSchema>;
@@ -27,7 +25,7 @@ export function LoginPage() {
 
   const navigate = useNavigate();
 
-  const {register, handleSubmit, formState: {isSubmitting}} = useForm<LoginFormSchema>({
+  const { register, handleSubmit, setError, formState: { isSubmitting, errors } } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
   });
 
@@ -56,56 +54,76 @@ export function LoginPage() {
   }
 
 
-async function handleGoogleAuth(credentialResponse: CredentialResponse){
+  async function handleGoogleAuth(credentialResponse: CredentialResponse) {
 
-  try {
-    const response = await api.post('/auth/google', {
-      credential: credentialResponse.credential,
-    })
-    await queryClient.invalidateQueries({ queryKey: ["me"] });
-    navigate('/dashboard');
-    
-  } catch (error) {
+    try {
+      const response = await api.post('/auth/google', {
+        credential: credentialResponse.credential,
+      })
+      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      navigate('/dashboard');
 
-    if(axios.isAxiosError(error)) {
+    } catch (error) {
 
-      const data = error.response?.data as ApiBackendError;
-      if (data.status === '400') {
-        toast.error('Server error');
-      }else if (data.status === '401') {
-        toast.error('Invalid credentials');
-      }else if (data.status === '409') {
-        toast.error(data.message);
-      }else{
-        toast.error("Ops...something went wrong")
+      if (axios.isAxiosError(error)) {
+
+        const data = error.response?.data as ApiBackendError;
+        if (data.status === '400') {
+          toast.error('Server error');
+        } else if (data.status === '401') {
+          toast.error('Invalid credentials');
+        } else if (data.status === '409') {
+          toast.error(data.message);
+        } else {
+          toast.error("Ops...something went wrong")
+        }
       }
+    }
   }
-}}
-
-
 
   return (
 
-    <main className=" w-full h-screen bg-accent-foreground px-5 py-8 relative">
+    <main className="flex-1 bg-accent-foreground px-5 py-8 relative">
 
       <div className="w-full">
-        <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the record.</h1>
-        <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the hours.</h1>
-        <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the invoice.</h1>
+        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the record.</h1>
+        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the hours.</h1>
+        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the invoice.</h1>
 
         <div className="w-full flex bg-accent p-8 absolute top-45 right-0">
-          <DecorativeLoginCard/>
+          <DecorativeLoginCard />
         </div>
 
-        <div className="w-full flex bg-accent-foreground p-8" >
+        <div className="w-full  flex flex-col gap-7 mt-100  bg-accent-foreground p-8">
+          <div className="w-full flex flex-col gap-1">
+            <h2 className="text-white text-lg font-medium tracking-wide">SIGN IN TO TIMEKEEPER</h2>
+            <p className="text-white text-sm font-light tracking-wide">Your workday, properly accounted for.</p>
+          </div>
 
-          <h2>SIGN IN TO TIMEKEEPER</h2>
-          <p>Your workday, properly accounted for.</p>
+          <form onSubmit={handleSubmit(handleLogin)} className="w-full flex flex-col gap-5">
+            <Input id="email" type="email" {...register("email")} autoComplete="email" placeholder="email" className="w-full p-6 bg-background rounded-none" />
 
-          <form action="">
-            
+            {
+              errors.email && <p id="email-error" role="alert"> {errors.email.message}</p>
+            }
+
+            <Button disabled={isSubmitting} type="submit" className="w-full p-6 text-sm font-bold text-card bg-destructive rounded-none ">SEND SECURE LOGIN LINK → </Button>
           </form>
 
+          <div className="w-full flex flex-row items-center justify-center gap-2 ">
+            <Separator className="flex-1 h-[1px] bg-white" />
+            <p className="shrink-0 px-2 text-xxs font-medium uppercase tracking-wide text-white">
+              or secure login
+            </p>
+            <Separator className="flex-1 h-[1px] bg-white" />
+          </div>
+
+          <GoogleLogin onSuccess={handleGoogleAuth}/>
+
+          <div className="flex flex-row items-center justify-center gap-1 mt-8">
+            <p className="text-xs text-white tracking-wide">Don't have an account?</p>
+            <Link to="/sign-up" className="text-xs font-bold text-accent tracking-wide">Click here to Sign up</Link>
+          </div>
         </div>
       </div>
     </main>

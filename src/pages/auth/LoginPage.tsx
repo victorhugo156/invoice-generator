@@ -86,23 +86,28 @@ async function handleGoogleAuth(credentialResponse: CredentialResponse){
 
   return (
 
-    <main className=" w-full h-screen bg-accent-foreground px-5 py-8">
+    <main className=" w-full h-screen bg-accent-foreground px-5 py-8 relative">
 
       <div className="w-full">
         <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the record.</h1>
         <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the hours.</h1>
         <h1 className="text-2xl text-concrete uppercase font-bold tracking-wider leading-9">the invoice.</h1>
 
-        <div className="w-full h-98 flex bg-accent">
+        <div className="w-full flex bg-accent p-8 absolute top-45 right-0">
           <DecorativeLoginCard/>
+        </div>
+
+        <div className="w-full flex bg-accent-foreground p-8" >
+
+          <h2>SIGN IN TO TIMEKEEPER</h2>
+          <p>Your workday, properly accounted for.</p>
+
+          <form action="">
+            
+          </form>
 
         </div>
       </div>
-
-      
-
-
-
     </main>
 
 

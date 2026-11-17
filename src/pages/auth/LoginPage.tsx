@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import type { ApiBackendError } from "@/@types/api_backend_error";
 import axios from "axios";
 import { DecorativeLoginCard } from "@/components/DecorativeLoginCard/DecorativeLoginCard";
+import { BrandLogo } from "@/components/BrandLogo";
 
 
 const loginFormSchema = z.object({
@@ -83,18 +84,58 @@ export function LoginPage() {
 
   return (
 
-    <main className="flex-1 bg-accent-foreground px-5 py-8 relative">
+    <main className="min-h-screen flex flex-col bg-accent-foreground px-5 py-8 lg:p-0">
+      <div className="w-full grid grid-cols-1 gap-6 lg:grid-cols-[41fr_59fr] lg:grid-rows-[max-content_1fr]
+  lg:gap-x-0
+  lg:gap-y-0
+  lg:flex-1">
+        <div className="
+          flex 
+          flex-col 
+          gap-15 
+          px-0 
+          lg:col-start-2 
+          lg:row-start-1 
+          lg:px-5 
+          lg:py-8
+          "
+        >
+          <div className="">
+            <BrandLogo />
+          </div>
 
-      <div className="w-full">
-        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the record.</h1>
-        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the hours.</h1>
-        <h1 className="text-2xl text-white uppercase font-bold tracking-wider leading-9">the invoice.</h1>
+          <h1 className="
+            text-2xl 
+           text-white 
+            uppercase 
+            font-bold 
+            tracking-wider 
+            leading-9 
+            lg:text-6xl 
+            lg:leading-18
 
-        <div className="w-full flex bg-accent p-8 absolute top-45 right-0">
+            "
+          >
+            <span className="block">the hours.</span>
+            <span className="block">the record.</span>
+            <span className="block">the invoice.</span>
+          </h1>
+        </div>
+
+        <div className="w-full flex bg-accent p-8 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:flex">
           <DecorativeLoginCard />
         </div>
 
-        <div className="w-full  flex flex-col gap-7 mt-100  bg-accent-foreground p-8">
+        <div className="
+          w-full 
+          flex 
+          flex-col 
+          gap-7
+          p-8 
+          lg:col-start-2 
+          lg:row-start-2
+          "
+        >
           <div className="w-full flex flex-col gap-1">
             <h2 className="text-white text-lg font-medium tracking-wide">SIGN IN TO TIMEKEEPER</h2>
             <p className="text-white text-sm font-light tracking-wide">Your workday, properly accounted for.</p>
@@ -118,9 +159,9 @@ export function LoginPage() {
             <Separator className="flex-1 h-[1px] bg-white" />
           </div>
 
-          <GoogleLogin onSuccess={handleGoogleAuth}/>
+          <GoogleLogin onSuccess={handleGoogleAuth} />
 
-          <div className="flex flex-row items-center justify-center gap-1 mt-8">
+          <div className="flex flex-row items-center justify-center gap-1 mt-8 ">
             <p className="text-xs text-white tracking-wide">Don't have an account?</p>
             <Link to="/sign-up" className="text-xs font-bold text-accent tracking-wide">Click here to Sign up</Link>
           </div>

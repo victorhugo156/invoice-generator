@@ -84,11 +84,20 @@ export function LoginPage() {
 
   return (
 
-    <main className="min-h-screen flex flex-col bg-accent-foreground px-5 py-8 lg:p-0">
-      <div className="w-full grid grid-cols-1 gap-6 lg:grid-cols-[41fr_59fr] lg:grid-rows-[max-content_1fr]
-  lg:gap-x-0
-  lg:gap-y-0
-  lg:flex-1">
+    <main className="
+    bg-accent-foreground
+      min-h-screen 
+      flex flex-col  
+      px-5 py-8 
+      lg:p-0">
+      <div className="
+        w-full 
+        grid grid-cols-1 gap-6 
+        lg:grid-cols-[59fr_41fr] 
+        lg:grid-rows-[max-content_1fr]
+        lg:gap-x-0
+        lg:gap-y-0
+        lg:flex-1">
         <div className="
           flex 
           flex-col 
@@ -113,7 +122,6 @@ export function LoginPage() {
             leading-9 
             lg:text-6xl 
             lg:leading-18
-
             "
           >
             <span className="block">the hours.</span>
@@ -122,7 +130,17 @@ export function LoginPage() {
           </h1>
         </div>
 
-        <div className="w-full flex bg-accent p-8 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:flex">
+        <div className="
+        bg-accent 
+        w-full 
+        flex  
+        p-8 
+        lg:col-start-1 
+        lg:row-start-1 
+        lg:row-span-2 
+        lg:flex
+        xl:p-25
+        ">
           <DecorativeLoginCard />
         </div>
 

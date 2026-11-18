@@ -1,4 +1,3 @@
-import { FileTextIcon } from "@phosphor-icons/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { Link, useNavigate } from "react-router-dom";
+import { DecorativeLoginCard } from "@/components/DecorativeLoginCard/DecorativeLoginCard";
+import { BrandLogo } from "@/components/BrandLogo";
 
 
 const signupFormSchema = z.object({
@@ -24,7 +25,7 @@ export function SignUpPage() {
 
   const navigate = useNavigate()
 
-  const {register, handleSubmit, formState: {isSubmitting}} = useForm<SignUpFormSchema>({
+  const {register, handleSubmit, formState: {isSubmitting, errors}} = useForm<SignUpFormSchema>({
     resolver: zodResolver(signupFormSchema),
   });
 
@@ -46,6 +47,140 @@ export function SignUpPage() {
 
 
   return (
+
+    <main className="
+    bg-accent-foreground
+      min-h-screen 
+      flex flex-col  
+      px-5 py-8 
+      lg:p-0">
+      <div className="
+        w-full 
+        grid grid-cols-1 gap-6 
+        lg:grid-cols-[59fr_41fr] 
+        lg:grid-rows-[max-content_1fr]
+        lg:gap-x-0
+        lg:gap-y-0
+        lg:flex-1">
+        <div className="
+          flex 
+          flex-col 
+          gap-15 
+          px-0 
+          lg:col-start-2 
+          lg:row-start-1 
+          lg:px-5 
+          lg:py-8
+          "
+        >
+          <div className="">
+            <BrandLogo />
+          </div>
+
+          <h1 className="
+            text-2xl 
+           text-white 
+            uppercase 
+            font-bold 
+            tracking-wider 
+            leading-9 
+            lg:text-6xl 
+            lg:leading-18
+            "
+          >
+            <span className="block">the hours.</span>
+            <span className="block">the record.</span>
+            <span className="block">the invoice.</span>
+          </h1>
+        </div>
+
+        <div className="
+        bg-accent 
+        w-full 
+        flex  
+        p-8 
+        lg:col-start-1 
+        lg:row-start-1 
+        lg:row-span-2 
+        lg:flex
+        xl:p-25
+        ">
+          <DecorativeLoginCard />
+        </div>
+
+        <div className="
+          w-full 
+          flex 
+          flex-col 
+          gap-7
+          p-8 
+          lg:col-start-2 
+          lg:row-start-2
+          "
+        >
+          <div className="w-full flex flex-col gap-1">
+            <h2 className="text-white text-lg font-medium tracking-wide uppercase">Sign up to start automating your financial.</h2>
+            <p className="text-white text-sm font-light tracking-wide">Your workday, properly accounted for.</p>
+          </div>
+
+          <form onSubmit={handleSubmit(handleSignUp)} className="w-full flex flex-col gap-5">
+
+            <div className="flex flex-col gap-1 ">
+            <Label htmlFor="firstName" className="text-xxs font-bold text-white uppercase tracking-wider ">First Name</Label>
+            <Input {...register("firstName")} id="firstName" type="text" autoComplete="firstName" placeholder="John" className="w-full p-6 bg-background rounded-none" />
+            {
+              errors.firstName && <p id="firstName-error" role="alert"> {errors.firstName.message}</p>
+            }
+            </div>
+
+            <div className="flex flex-col gap-1 ">
+            <Label htmlFor="lastName" className="text-xxs font-bold text-white uppercase tracking-wider ">Last Name</Label>
+            <Input {...register("lastName")} id="lastName" type="text" autoComplete="lastName" placeholder="Doe" className="w-full p-6 bg-background rounded-none" />
+            {
+              errors.lastName && <p id="lastName-error" role="alert"> {errors.lastName.message}</p>
+            }
+            </div>
+
+            <div className="flex flex-col gap-1 ">
+            <Label htmlFor="email" className="text-xxs font-bold text-white uppercase tracking-wider ">Work Email</Label>
+            <Input {...register("email")} id="email" type="email" autoComplete="email" placeholder="name@company.com" className="w-full p-6 bg-background rounded-none" />
+            {
+              errors.email && <p id="email-error" role="alert"> {errors.email.message}</p>
+            }
+            </div>
+
+            <Button disabled={isSubmitting} type="submit" className="w-full p-6 text-sm font-bold text-card bg-destructive rounded-none uppercase tracking-wider ">SignUp → </Button>
+          </form>
+
+          <div className="w-full flex flex-row items-center justify-center gap-2 ">
+            <Separator className="flex-1 h-[1px] bg-white" />
+            <p className="shrink-0 px-2 text-xxs font-medium uppercase tracking-wide text-white">
+              or sign up with your google account
+            </p>
+            <Separator className="flex-1 h-[1px] bg-white" />
+          </div>
+
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log("SignUp Failed");
+            }}
+          />
+
+          <div className="flex flex-row items-center justify-center gap-1 mt-8 ">
+            <p className="text-xs text-white tracking-wide">Already have an account?</p>
+            <Link to="/" className="text-xs font-bold text-accent tracking-wide">Click here to Login</Link>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  );
+}
+
+/**
     <div className="flex min-h-screen flex-col gap-4 items-center justify-center px-4 py-8 ">
       <div className="w-full max-w-[440px] rounded-lg border border-gray-200 bg-white px-8 py-14 shadow-md max-[440px]:px-5">
         <header className="flex w-full flex-col items-center justify-center gap-2 mb-12">
@@ -101,6 +236,5 @@ export function SignUpPage() {
         <p className="text-xxs text-gray-400">© 2026 VTR Technologies • All Rights Reserved</p>
       </div>
     </div>
-  );
-}
+ */
 
